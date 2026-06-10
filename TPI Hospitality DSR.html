@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TPI Hospitality × Reeco — Digital Sales Room</title>
+<meta name="description" content="Digital Sales Room prepared for Robert Kisabeth and Matt Weimer at TPI Hospitality.">
+<link rel="stylesheet" href="colors_and_type.css">
+<link rel="icon" href="assets/reeco-mark.svg">
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body { margin: 0; background: #fff; color: var(--fg-1); font-family: var(--font-sans); }
+  ::selection { background: var(--mint-100); color: var(--navy-900); }
+  a { color: var(--fg-link); text-decoration: none; font-weight: var(--fw-semi); }
+  a:hover { text-decoration: underline; }
+
+  /* ── NAV ── */
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.88);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--border-1);
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 14px 32px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .nav-brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .nav-brand img { height: 22px; display: block; }
+  .nav-divider { width: 1px; height: 20px; background: var(--stone-300); flex-shrink: 0; }
+  .nav-context { font-size: 12px; color: var(--stone-700); font-weight: var(--fw-medium); letter-spacing: 0.1px; white-space: nowrap; }
+  .nav-context strong { color: var(--navy-900); font-weight: var(--fw-bold); }
+  .nav-links { display: none; margin-left: auto; gap: 20px; }
+  nav a {
+    color: var(--navy-900);
+    font-size: 14px;
+    font-weight: var(--fw-bold);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+  .nav-links a:hover { color: var(--mint-700); }
+  .nav-cta { margin-left: auto; flex-shrink: 0; }
+  @media (min-width: 980px) { .nav-links { display: flex; } .nav-cta { margin-left: 24px; } }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 11px 20px; border-radius: var(--radius-xl);
+    font-size: 14px; font-weight: var(--fw-semi);
+    border: 1px solid transparent; cursor: pointer;
+    transition: all var(--duration-med) var(--ease-out);
+    text-decoration: none; font-family: var(--font-sans);
+  }
+  .btn-primary { background: var(--mint-500); color: #fff; }
+  .btn-primary:hover { background: var(--mint-700); text-decoration: none; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+  .btn-ghost { background: transparent; color: var(--navy-900); border-color: rgba(10,24,74,0.3); }
+  .btn-ghost:hover { border-color: var(--navy-900); text-decoration: none; }
+  .btn-on-dark { background: #fff; color: var(--navy-900); }
+  .btn-on-dark:hover { background: var(--navy-900); color: #fff; text-decoration: none; }
+  .btn-lg { padding: 14px 26px; font-size: 15px; }
+  .btn .arr { transition: transform var(--duration-med) var(--ease-out); }
+  .btn:hover .arr { transform: translateX(3px); }
+
+  /* ── SECTION SHELL ── */
+  section { padding: 96px 32px; position: relative; }
+  .container { max-width: 1200px; margin: 0 auto; }
+  .eyebrow {
+    font-size: 11px; font-weight: var(--fw-bold); letter-spacing: 2.5px;
+    text-transform: uppercase; color: var(--mint-700);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .eyebrow::before { content: "///"; color: var(--mint-500); letter-spacing: 0; }
+  .section-title {
+    font-size: 44px; font-weight: var(--fw-black);
+    letter-spacing: -0.012em; line-height: 1.1;
+    color: var(--navy-900); margin: 14px 0 16px;
+    max-width: 880px; text-wrap: balance;
+  }
+  .section-sub {
+    font-size: 17px; line-height: 1.6; color: var(--stone-700);
+    max-width: 660px; margin: 0 0 48px;
+  }
+  @media (max-width: 720px) {
+    section { padding: 64px 22px; }
+    .section-title { font-size: 32px; }
+    .section-sub { font-size: 15px; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; overflow: hidden;
+    background: var(--mint-500);
+    color: var(--navy-900);
+    padding: 56px 32px 0;
+  }
+  /* No scallop / wave — clean straight edge */
+  .hero::before {
+    content: ""; position: absolute; inset: auto -120px -180px auto;
+    width: 520px; height: 520px;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.32), transparent 60%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1.35fr 1fr;
+    gap: 56px; align-items: start;
+    padding-bottom: 120px;
+    position: relative; z-index: 1;
+  }
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 72px);
+    font-weight: var(--fw-black);
+    letter-spacing: -0.025em; line-height: 1.02;
+    color: var(--navy-900); margin: 0 0 16px;
+    text-wrap: balance;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--navy-900);
+    background: none;
+    padding: 0;
+    border-radius: 0;
+    font-size: 0.6em;
+    font-weight: var(--fw-regular);
+    opacity: 0.42;
+    margin: 0 0.04em;
+    vertical-align: 0.22em;
+    font-family: var(--font-sans);
+  }
+  .hero-pill {
+    display: inline-flex; align-items: center; gap: 9px;
+    background: rgba(10,24,74,0.12);
+    color: var(--navy-900);
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 11px; font-weight: var(--fw-bold);
+    letter-spacing: 2px; text-transform: uppercase;
+    margin-bottom: 26px;
+  }
+  .hero-pill .live-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--navy-900);
+    animation: pulse 2s var(--ease-out) infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.35; } }
+  .hero-sub {
+    font-size: 18px; line-height: 1.55; color: var(--navy-900);
+    max-width: 520px; opacity: 0.85; margin: 0 0 24px;
+    font-weight: var(--fw-medium);
+  }
+  .hero-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .hero-tag {
+    display: inline-flex; align-items: center;
+    background: rgba(255,255,255,0.5);
+    border: 1px solid rgba(10,24,74,0.12);
+    color: var(--navy-900);
+    padding: 6px 14px; border-radius: 999px;
+    font-size: 12px; font-weight: var(--fw-bold);
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* Meeting card */
+  .meeting-card {
+    background: #fff; border-radius: var(--radius-2xl);
+    padding: 28px; box-shadow: var(--shadow-xl);
+    color: var(--navy-900);
+  }
+  .meeting-eyebrow {
+    font-size: 11px; font-weight: var(--fw-bold);
+    letter-spacing: 2px; text-transform: uppercase;
+    color: var(--mint-700); margin-bottom: 6px;
+  }
+  .meeting-title {
+    font-size: 21px; font-weight: var(--fw-bold);
+    color: var(--navy-900); margin: 0 0 18px;
+    letter-spacing: -0.008em; line-height: 1.2;
+  }
+  .meeting-when {
+    display: grid; grid-template-columns: 64px 1fr;
+    gap: 14px; align-items: center;
+    padding: 18px 0; border-top: 1px solid var(--stone-200);
+  }
+  .meeting-date-box {
+    display: flex; flex-direction: column; align-items: center;
+    background: var(--mint-100); border-radius: var(--radius-lg);
+    padding: 10px 4px; min-width: 60px;
+  }
+  .meeting-date-box .day {
+    font-size: 22px; font-weight: var(--fw-black);
+    letter-spacing: -0.02em; line-height: 1;
+    color: var(--navy-900);
+  }
+  .meeting-date-box .mon {
+    font-size: 10px; font-weight: var(--fw-bold);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--mint-800); margin-top: 4px;
+  }
+  .meeting-meta { display: flex; flex-direction: column; gap: 3px; }
+  .meeting-meta .l1 { font-size: 14px; font-weight: var(--fw-bold); color: var(--navy-900); }
+  .meeting-meta .l2, .meeting-meta .l3 { font-size: 12px; color: var(--stone-500); font-weight: var(--fw-medium); }
+  .attendee-block { border-top: 1px solid var(--stone-200); padding-top: 16px; margin-top: 4px; }
+  .attendee-org-label {
+    font-size: 10px; font-weight: var(--fw-bold);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--stone-400); margin: 0 0 8px;
+  }
+  .attendee-org-label + .attendee-org-label { margin-top: 12px; }
+  .attendee-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 6px 0;
+  }
+  .av {
+    width: 32px; height: 32px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: var(--fw-black);
+    flex-shrink: 0; letter-spacing: 0;
+  }
+  .av-tpi { background: var(--mint-100); color: var(--mint-800); }
+  .av-reeco { background: var(--navy-900); color: #fff; }
+  .attendee-name { font-size: 12px; font-weight: var(--fw-bold); color: var(--navy-900); }
+  .attendee-role { font-size: 11px; color: var(--stone-500); }
+
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; padding-bottom: 80px; gap: 36px; }
+    .hero { padding: 56px 22px 0; }
+  }
+
+  /* ── HERO TIMELINE ── */
+  .hero-tl-wrap { background: var(--mint-500); padding: 0 32px; }
+  .hero-tl-card {
+    max-width: 1200px; margin: 0 auto;
+    background: #fff; border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-lg); padding: 24px 32px;
+    display: grid; grid-template-columns: minmax(160px,auto) repeat(3, 1fr);
+    gap: 24px; align-items: start;
+    position: relative; top: -56px;
+  }
+  .htl-label { display: flex; flex-direction: column; gap: 4px; padding-top: 8px; }
+  .htl-label-eyebrow {
+    font-size: 10px; font-weight: var(--fw-bold);
+    letter-spacing: 2px; text-transform: uppercase; color: var(--mint-700);
+  }
+  .htl-label-title {
+    font-size: 16px; font-weight: var(--fw-bold);
+    color: var(--navy-900); letter-spacing: -0.005em; line-height: 1.2;
+  }
+  .htl-step {
+    display: flex; flex-direction: column; gap: 3px;
+    padding-left: 22px; padding-top: 16px;
+    border-left: 1px solid var(--stone-200);
+    position: relative;
+  }
+  .htl-step::before {
+    content: ""; position: absolute; left: -6px; top: 12px;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: #fff; border: 2px solid var(--mint-500);
+    box-shadow: 0 0 0 1px var(--stone-200);
+  }
+  .htl-step-num {
+    font-size: 9px; font-weight: var(--fw-bold);
+    letter-spacing: 2px; text-transform: uppercase; color: var(--stone-400);
+  }
+  .htl-step-title {
+    font-size: 13px; font-weight: var(--fw-bold);
+    color: var(--navy-900); line-height: 1.3; letter-spacing: -0.005em;
+  }
+  .htl-step-desc {
+    font-size: 11px; color: var(--stone-500);
+    font-weight: var(--fw-medium); line-height: 1.45; margin-top: 2px;
+  }
+  .htl-step-date { font-size: 11px; color: var(--mint-700); font-weight: var(--fw-bold); margin-top: 4px; }
+  @media (max-width: 900px) {
+    .hero-tl-wrap { padding: 0 22px; }
+    .hero-tl-card { grid-template-columns: 1fr; gap: 16px; padding: 20px; top: -44px; }
+    .htl-step { padding-left: 20px; padding-bottom: 16px; }
+    .htl-step:last-child { padding-bottom: 0; }
+  }
+
+  /* Spacer to absorb the negative-top of the timeline card */
+  .hero-tl-spacer { background: #fff; height: 40px; }
+
+  /* ── PROBLEM & SOLUTION ── */
+  .ps-pair {
+    display: grid; grid-template-columns: 72px 1fr 52px 1fr;
+    gap: 20px; align-items: stretch;
+    padding: 36px 0; border-top: 1px solid var(--stone-200);
+  }
+  .ps-pair:first-child { border-top: none; padding-top: 0; }
+  .ps-pair:last-child { padding-bottom: 0; }
+  .ps-num {
+    font-size: 60px; font-weight: var(--fw-black);
+    letter-spacing: -0.03em; line-height: 1;
+    color: var(--navy-900); font-feature-settings: "tnum";
+  }
+  .ps-card {
+    padding: 26px; border-radius: var(--radius-2xl);
+    display: flex; flex-direction: column;
+  }
+  .ps-card.problem { background: var(--rose-100); border: 1px solid var(--rose-200); }
+  .ps-card.answer  { background: var(--mint-100);  border: 1px solid var(--mint-200); }
+  .ps-eyebrow {
+    font-size: 10px; font-weight: var(--fw-bold);
+    letter-spacing: 2px; text-transform: uppercase;
+    display: inline-flex; align-items: center; gap: 6px; margin-bottom: 10px;
+  }
+  .ps-eyebrow.problem { color: #B81E63; }
+  .ps-eyebrow.answer  { color: var(--mint-800); }
+  .ps-dot { width: 5px; height: 5px; border-radius: 50%; }
+  .ps-eyebrow.problem .ps-dot { background: var(--rose-500); }
+  .ps-eyebrow.answer  .ps-dot { background: var(--mint-500); }
+  .ps-headline {
+    font-size: 17px; font-weight: var(--fw-bold);
+    color: var(--navy-900); margin: 0 0 10px;
+    letter-spacing: -0.005em; line-height: 1.25;
+  }
+  .ps-body {
+    font-size: 14px; line-height: 1.6;
+    color: var(--stone-700); margin: 0; flex-grow: 1;
+  }
+  .ps-arrow {
+    display: flex; align-items: center; justify-content: center; color: var(--mint-500);
+  }
+  @media (max-width: 900px) {
+    .ps-pair { grid-template-columns: 1fr; gap: 10px; padding: 24px 0; }
+    .ps-num { font-size: 40px; }
+    .ps-arrow { transform: rotate(90deg); margin: 0 auto; }
+  }
+
+  /* Callout quote */
+  .callout-quote {
+    margin-top: 56px; background: var(--navy-900); color: #fff;
+    border-radius: var(--radius-3xl); padding: 40px 52px;
+    display: grid; grid-template-columns: 72px 1fr;
+    gap: 28px; align-items: start;
+    position: relative; overflow: hidden;
+  }
+  .callout-quote.mint { background: var(--mint-500); color: var(--navy-900); }
+  .callout-quote::before {
+    content: ""; position: absolute; top: -100px; right: -100px;
+    width: 280px; height: 280px;
+    background: rgba(255,255,255,0.06); border-radius: 50%;
+  }
+  .callout-quote.mint::before { background: rgba(255,255,255,0.24); }
+  .callout-mark {
+    font-family: Georgia, serif; font-size: 110px;
+    font-weight: var(--fw-black); line-height: 0.55;
+    color: var(--mint-300); position: relative; z-index: 1;
+  }
+  .callout-quote.mint .callout-mark { color: rgba(10,24,74,0.22); }
+  .callout-body { position: relative; z-index: 1; }
+  .callout-body p {
+    font-size: 20px; line-height: 1.5; font-weight: var(--fw-medium);
+    margin: 0 0 22px; color: inherit; letter-spacing: -0.005em;
+  }
+  .callout-attr {
+    display: flex; align-items: center; gap: 12px;
+    padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.18);
+  }
+  .callout-quote.mint .callout-attr { border-top-color: rgba(10,24,74,0.18); }
+  .callout-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--mint-300); color: var(--navy-900);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: var(--fw-black); flex-shrink: 0;
+  }
+  .callout-quote.mint .callout-avatar { background: var(--navy-900); color: #fff; }
+  .callout-name { font-size: 15px; font-weight: var(--fw-bold); color: inherit; }
+  .callout-meta { font-size: 12px; opacity: 0.72; margin-top: 2px; }
+  @media (max-width: 720px) {
+    .callout-quote { padding: 30px 26px; grid-template-columns: 1fr; gap: 10px; }
+    .callout-mark { font-size: 64px; }
+    .callout-body p { font-size: 17px; }
+  }
+
+  /* ── PLATFORM ── */
+  .platform-section { background: var(--stone-100); }
+  .platform-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .platform-card {
+    background: #fff; border: 1px solid var(--stone-200);
+    border-radius: var(--radius-2xl); padding: 30px;
+    display: flex; flex-direction: column;
+  }
+  .platform-card-head {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 14px; padding-bottom: 16px;
+    border-bottom: 1px solid var(--stone-200);
+  }
+  .platform-icon {
+    width: 44px; height: 44px; border-radius: var(--radius-lg);
+    background: var(--mint-100); color: var(--mint-800);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .platform-card h3 {
+    font-size: 19px; font-weight: var(--fw-bold);
+    color: var(--navy-900); margin: 0;
+    letter-spacing: -0.01em; line-height: 1.2;
+  }
+  .platform-card p { font-size: 14px; line-height: 1.6; color: var(--stone-700); margin: 0; }
+  @media (max-width: 900px) { .platform-grid { grid-template-columns: 1fr; } }
+
+  /* ── PRICING ── */
+  .pricing-section { background: var(--navy-900); color: #fff; }
+  .pricing-section .eyebrow { color: var(--mint-300); }
+  .pricing-section .eyebrow::before { color: var(--mint-300); }
+  .pricing-section .section-title { color: #fff; }
+  .pricing-section .section-sub { color: rgba(255,255,255,0.75); }
+
+  .pricing-v2 {
+    background: #fff; border-radius: var(--radius-3xl);
+    padding: 48px; color: var(--navy-900); box-shadow: var(--shadow-xl);
+  }
+  .pv2-section-label {
+    font-size: 11px; font-weight: var(--fw-bold);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--stone-500); margin-bottom: 14px;
+  }
+  .pricing-table {
+    width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums;
+    margin-bottom: 28px;
+  }
+  .pricing-table thead th {
+    text-align: left; padding: 0 14px 12px;
+    font-size: 10px; font-weight: var(--fw-bold);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--stone-500); border-bottom: 1px solid var(--stone-200);
+  }
+  .pricing-table thead th:last-child { text-align: right; }
+  .pricing-table tbody td {
+    padding: 16px 14px; border-bottom: 1px solid var(--stone-200);
+    font-size: 14px; color: var(--navy-900); vertical-align: middle;
+  }
+  .pricing-table tbody td:first-child { padding-left: 0; }
+  .pricing-table tbody td:last-child { padding-right: 0; text-align: right; }
+  .pricing-table tbody tr:last-child td { border-bottom: none; }
+  .pricing-module { font-size: 15px; font-weight: var(--fw-bold); color: var(--navy-900); }
+  .pricing-module .sub {
+    display: block; font-size: 12px; font-weight: var(--fw-medium);
+    color: var(--stone-500); margin-top: 3px;
+  }
+  .billing-badge {
+    font-size: 10px; font-weight: var(--fw-bold);
+    letter-spacing: 1.2px; text-transform: uppercase;
+    padding: 4px 9px; border-radius: 999px; display: inline-block;
+    background: var(--stone-100); color: var(--stone-700);
+  }
+  .billing-badge.included { background: var(--mint-100); color: var(--mint-800); }
+  .pricing-divider {
+    border: none; border-top: 1px solid var(--stone-200);
+    margin: 0 0 28px;
+  }
+
+  /* Portfolio table */
+  .portfolio-table tbody tr.total-row td {
+    font-weight: var(--fw-black); background: var(--stone-100); font-size: 15px;
+    border-top: 2px solid var(--stone-300); border-bottom: none;
+  }
+
+  /* Totals row */
+  .pricing-totals {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 28px;
+  }
+  .ptotal-card {
+    border-radius: var(--radius-xl); padding: 22px 24px;
+    background: var(--mint-500);
+  }
+  .ptotal-card.dark { background: var(--navy-900); color: #fff; }
+  .ptotal-card .tlbl {
+    font-size: 10px; font-weight: var(--fw-bold);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--navy-900);
+  }
+  .ptotal-card.dark .tlbl { color: var(--mint-300); }
+  .ptotal-card .tnum {
+    font-size: 34px; font-weight: var(--fw-black);
+    letter-spacing: -0.02em; line-height: 1;
+    color: var(--navy-900); margin: 7px 0 4px;
+    font-feature-settings: "tnum";
+  }
+  .ptotal-card.dark .tnum { color: #fff; }
+  .ptotal-card .tdesc { font-size: 12px; color: var(--navy-800); font-weight: var(--fw-semi); }
+  .ptotal-card.dark .tdesc { color: rgba(255,255,255,0.72); }
+  @media (max-width: 720px) { .pricing-totals { grid-template-columns: 1fr; } }
+
+  /* Fees waived */
+  .fees-waived {
+    margin-top: 20px; padding: 20px 22px;
+    background: var(--mint-100); border: 1px solid var(--mint-200);
+    border-radius: var(--radius-lg);
+  }
+  .fees-waived-title {
+    font-size: 10px; font-weight: var(--fw-bold);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--mint-800); margin-bottom: 12px;
+  }
+  .fees-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 8px 0; font-size: 13px;
+    border-bottom: 1px solid rgba(43,204,137,0.2);
+  }
+  .fees-row:last-of-type { border-bottom: none; }
+  .fees-row .fl { color: var(--navy-900); font-weight: var(--fw-medium); }
+  .fees-row .fr { display: flex; align-items: center; gap: 10px; }
+  .fees-row .strike { text-decoration: line-through; color: var(--stone-400); font-size: 12px; }
+  .fees-row .free { color: var(--mint-700); font-weight: var(--fw-bold); }
+  .fees-total {
+    margin-top: 12px; padding-top: 12px;
+    border-top: 2px solid var(--mint-300);
+    display: flex; justify-content: space-between;
+    font-weight: var(--fw-black); font-size: 14px; color: var(--navy-900);
+  }
+  .fees-total .saved { color: var(--mint-700); }
+
+  /* Contract terms */
+  .pricing-terms {
+    margin-top: 18px; padding: 18px 22px;
+    background: var(--navy-100); border-radius: var(--radius-lg);
+    display: flex; flex-wrap: wrap; gap: 24px;
+  }
+  .pricing-terms-item { display: flex; flex-direction: column; gap: 2px; }
+  .pricing-terms-item .lbl {
+    font-size: 9px; font-weight: var(--fw-bold);
+    letter-spacing: 1.5px; text-transform: uppercase; color: var(--stone-500);
+  }
+  .pricing-terms-item .val { font-size: 13px; font-weight: var(--fw-bold); color: var(--navy-900); }
+
+  /* Discount badge */
+  .pricing-v2-footer {
+    margin-top: 24px; display: flex; align-items: center;
+    justify-content: space-between; gap: 14px; flex-wrap: wrap;
+  }
+  .pricing-v2-discount {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: var(--fw-semi);
+    color: var(--mint-800); background: var(--mint-100);
+    padding: 8px 14px; border-radius: var(--radius-lg);
+  }
+  .pricing-v2-discount svg { display: none; }
+  .pricing-v2-discount .check-icon { display: inline-flex; color: var(--mint-700); }
+
+  @media (max-width: 720px) {
+    .pricing-v2 { padding: 26px; }
+    .pricing-table thead { display: none; }
+    .pricing-table tbody tr { display: block; padding: 16px 0; border-bottom: 1px solid var(--stone-200); }
+    .pricing-table tbody td { display: block; padding: 3px 0 !important; border: none; text-align: left !important; }
+  }
+
+  /* ── INTEGRATION ── */
+  .integration-section { background: var(--stone-100); }
+  .int-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 40px; }
+  .int-card {
+    background: #fff; border: 1px solid var(--stone-200);
+    border-radius: var(--radius-2xl); padding: 26px;
+  }
+  .int-card-top {
+    display: flex; align-items: flex-start;
+    justify-content: space-between; gap: 10px; margin-bottom: 10px;
+  }
+  .int-type {
+    font-size: 10px; font-weight: var(--fw-bold);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--stone-500); margin-bottom: 5px;
+  }
+  .int-name {
+    font-size: 18px; font-weight: var(--fw-bold);
+    color: var(--navy-900); letter-spacing: -0.01em; line-height: 1.2;
+  }
+  .int-status {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 10px; font-weight: var(--fw-bold);
+    padding: 4px 10px; border-radius: 999px;
+    white-space: nowrap; flex-shrink: 0;
+    letter-spacing: 0.5px;
+  }
+  .int-status.ready     { background: var(--mint-100); color: var(--mint-800); }
+  .int-status.twoway    { background: var(--sky-100);  color: #1A6FA8; }
+  .int-status.supported { background: var(--navy-100); color: var(--navy-900); }
+  .int-status.partner   { background: var(--sun-100);  color: #8C6A00; }
+  .int-body { font-size: 14px; line-height: 1.6; color: var(--stone-700); margin: 0; }
+  @media (max-width: 720px) { .int-grid { grid-template-columns: 1fr; } }
+
+  /* Implementation */
+  .impl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start; }
+  .impl-checklist {
+    background: #fff; border: 1px solid var(--stone-200);
+    border-radius: var(--radius-2xl); padding: 28px;
+  }
+  .impl-checklist h3 {
+    font-size: 17px; font-weight: var(--fw-bold);
+    color: var(--navy-900); margin: 0 0 18px; letter-spacing: -0.005em;
+  }
+  .impl-check {
+    display: flex; align-items: flex-start; gap: 11px;
+    padding: 11px 0; border-bottom: 1px solid var(--stone-100);
+    font-size: 13.5px; line-height: 1.5; color: var(--stone-700);
+  }
+  .impl-check:last-child { border-bottom: none; }
+  .impl-check-icon {
+    width: 20px; height: 20px; border-radius: 50%;
+    background: var(--mint-100); color: var(--mint-800);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .impl-check strong { color: var(--navy-900); font-weight: var(--fw-bold); }
+
+  .impl-phases { display: flex; flex-direction: column; gap: 12px; }
+  .impl-phase {
+    background: #fff; border: 1px solid var(--stone-200);
+    border-radius: var(--radius-xl); padding: 20px 22px;
+  }
+  .impl-phase-eyebrow {
+    font-size: 10px; font-weight: var(--fw-bold);
+    letter-spacing: 1.5px; text-transform: uppercase;
+    color: var(--mint-700); margin-bottom: 5px;
+  }
+  .impl-phase h4 {
+    font-size: 15px; font-weight: var(--fw-bold);
+    color: var(--navy-900); margin: 0 0 6px; letter-spacing: -0.005em;
+  }
+  .impl-phase p { font-size: 13px; line-height: 1.55; color: var(--stone-700); margin: 0; }
+  @media (max-width: 900px) { .impl-grid { grid-template-columns: 1fr; } }
+
+  /* ── COLLATERAL ── */
+  .collateral-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .collateral-card {
+    display: grid; grid-template-columns: 52px 1fr auto;
+    gap: 16px; align-items: center;
+    padding: 20px 22px; background: #fff;
+    border: 1px solid var(--stone-200); border-radius: var(--radius-xl);
+    text-decoration: none; transition: all var(--duration-med) var(--ease-out);
+  }
+  .collateral-card:hover {
+    border-color: var(--mint-500); box-shadow: var(--shadow-md);
+    text-decoration: none; transform: translateY(-2px);
+  }
+  .coll-icon {
+    width: 52px; height: 52px; border-radius: var(--radius-lg);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .coll-icon.deck  { background: var(--mint-100); color: var(--mint-800); }
+  .coll-icon.video { background: var(--rose-100); color: #B81E63; }
+  .coll-icon.doc   { background: var(--sky-100);  color: #1A6FA8; }
+  .coll-icon.lock  { background: var(--sun-100);  color: #8C6A00; }
+  .coll-body { min-width: 0; }
+  .coll-title {
+    font-size: 14px; font-weight: var(--fw-bold);
+    color: var(--navy-900); margin-bottom: 4px; letter-spacing: -0.005em;
+  }
+  .coll-desc { font-size: 12px; color: var(--stone-700); line-height: 1.45; }
+  .coll-arrow { color: var(--stone-400); transition: color var(--duration-med) var(--ease-out), transform var(--duration-med) var(--ease-out); }
+  .collateral-card:hover .coll-arrow { color: var(--mint-700); transform: translateX(3px); }
+  @media (max-width: 720px) { .collateral-grid { grid-template-columns: 1fr; } }
+
+  /* ── FAQ ── */
+  .faq-list { display: flex; flex-direction: column; gap: 10px; }
+  .faq-item {
+    background: #fff; border: 1px solid var(--stone-200);
+    border-radius: var(--radius-xl); overflow: hidden;
+    transition: all var(--duration-med) var(--ease-out);
+  }
+  .faq-item[open] { border-color: var(--mint-300); box-shadow: var(--shadow-sm); }
+  .faq-q {
+    padding: 20px 26px; cursor: pointer; list-style: none;
+    display: flex; align-items: center; justify-content: space-between; gap: 22px;
+    font-size: 16px; font-weight: var(--fw-bold);
+    color: var(--navy-900); letter-spacing: -0.005em; line-height: 1.35;
+  }
+  .faq-q::-webkit-details-marker { display: none; }
+  .faq-toggle {
+    width: 26px; height: 26px; border-radius: 50%;
+    background: var(--stone-200); color: var(--navy-900);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: all var(--duration-med) var(--ease-out);
+  }
+  .faq-item[open] .faq-toggle { background: var(--mint-500); color: #fff; transform: rotate(45deg); }
+  .faq-a { padding: 0 26px 22px; font-size: 14.5px; line-height: 1.65; color: var(--stone-700); }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    background: var(--navy-900); color: #fff;
+    position: relative; overflow: hidden;
+  }
+  .contact-section::before {
+    content: ""; position: absolute; bottom: -200px; right: -100px;
+    width: 440px; height: 440px;
+    background: radial-gradient(circle, rgba(43,204,137,0.28), transparent 70%);
+    border-radius: 50%;
+  }
+  .contact-section .eyebrow { color: var(--mint-300); }
+  .contact-section .eyebrow::before { color: var(--mint-300); }
+  .contact-section .section-title { color: #fff; }
+  .contact-section .section-sub { color: rgba(255,255,255,0.72); }
+
+  .contact-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    position: relative; z-index: 1; margin-bottom: 28px;
+  }
+  .contact-card {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-2xl); padding: 26px; backdrop-filter: blur(8px);
+  }
+  .contact-card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+  .contact-avatar {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: var(--mint-500); color: var(--navy-900);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: var(--fw-black);
+  }
+  .contact-name { font-size: 17px; font-weight: var(--fw-bold); color: #fff; }
+  .contact-role { font-size: 13px; color: rgba(255,255,255,0.66); margin-top: 2px; }
+  .contact-email {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--mint-300); font-size: 13px; font-weight: var(--fw-semi);
+    padding: 9px 13px; background: rgba(43,204,137,0.12);
+    border-radius: var(--radius-md); text-decoration: none;
+  }
+  .contact-email:hover { background: rgba(43,204,137,0.24); text-decoration: none; }
+
+  .booking-card {
+    background: var(--mint-500); border-radius: var(--radius-2xl);
+    padding: 38px 34px; display: grid; grid-template-columns: 1.6fr 1fr;
+    gap: 28px; align-items: center; position: relative; z-index: 1;
+  }
+  .booking-card h3 {
+    font-size: 30px; font-weight: var(--fw-black);
+    color: var(--navy-900); margin: 0 0 10px;
+    letter-spacing: -0.015em; line-height: 1.15;
+  }
+  .booking-card p {
+    font-size: 14px; color: var(--navy-900); opacity: 0.8;
+    margin: 0; line-height: 1.55; font-weight: var(--fw-medium);
+  }
+  .booking-cta { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+  .booking-cta .sub-line { font-size: 11px; color: var(--navy-900); opacity: 0.65; text-align: right; }
+  @media (max-width: 720px) {
+    .contact-grid { grid-template-columns: 1fr; }
+    .booking-card { grid-template-columns: 1fr; padding: 30px 22px; }
+    .booking-cta { align-items: stretch; }
+    .booking-card h3 { font-size: 24px; }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #fff; padding: 36px 32px;
+    border-top: 1px solid var(--stone-200);
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 24px;
+    flex-wrap: wrap;
+  }
+  .footer-brand { display: flex; align-items: center; gap: 14px; }
+  .footer-brand img { height: 20px; display: block; }
+  .footer-note { font-size: 12px; color: var(--stone-500); line-height: 1.55; max-width: 540px; }
+
+  /* ── REVEAL ── */
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out); }
+    .reveal.visible { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ──────────── NAV ──────────── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#top" aria-label="Reeco home">
+      <img src="assets/reeco-logo-primary-green.svg" alt="Reeco">
+    </a>
+    <div class="nav-divider" aria-hidden="true"></div>
+    <div class="nav-context">Prepared for <strong>TPI Hospitality</strong></div>
+    <div class="nav-links">
+      <a href="#problem">Problem &amp; Solution</a>
+      <a href="#platform">Platform</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#integration">Integration</a>
+      <a href="#library">Library</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="#booking" class="btn btn-primary nav-cta">Schedule time with Zander <span class="arr">→</span></a>
+  </div>
+</nav>
+
+<!-- ──────────── §01 HERO ──────────── -->
+<section class="hero" id="top" data-screen-label="Hero">
+  <div class="hero-inner">
+    <div>
+      <h1>TPI Hospitality <em>&times;</em> Reeco</h1>
+      <div class="hero-pill" style="margin-bottom: 26px;">
+        <span class="live-dot"></span>Digital Sales Room
+      </div>
+      <p class="hero-sub">A hospitality-native procurement platform built to replace complexity with clarity — across purchasing, AP automation, inventory, and culinary management.</p>
+      <div class="hero-tags">
+        <span class="hero-tag">Built for TPI Hospitality</span>
+        <span class="hero-tag">Full-Service + Select-Service Portfolio</span>
+        <span class="hero-tag">Dynamics GP + Profit Sword</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#booking" class="btn btn-on-dark btn-lg" style="background:var(--navy-900);color:#fff;">Schedule time with Zander <span class="arr">→</span></a>
+        <a href="#problem" class="btn btn-ghost" style="border-color:rgba(10,24,74,0.3);color:var(--navy-900);">See the solution ↓</a>
+      </div>
+    </div>
+
+    <div class="meeting-card reveal">
+      <div class="meeting-eyebrow">Next Step</div>
+      <div class="meeting-title">Proposal Meeting</div>
+      <div class="meeting-when">
+        <div class="meeting-date-box">
+          <div class="day">TBD</div>
+          <div class="mon">Date</div>
+        </div>
+        <div class="meeting-meta">
+          <div class="l1">Meeting Date — To Be Confirmed</div>
+          <div class="l2">Full Date / Time ET · 45 Minutes</div>
+          <div class="l3">Demo + Proposal Review</div>
+        </div>
+      </div>
+      <div class="attendee-block">
+        <div class="attendee-org-label">TPI Hospitality</div>
+        <div class="attendee-row">
+          <div class="av av-tpi">RK</div>
+          <div>
+            <div class="attendee-name">Robert Kisabeth</div>
+            <div class="attendee-role">COO</div>
+          </div>
+        </div>
+        <div class="attendee-row">
+          <div class="av av-tpi">MW</div>
+          <div>
+            <div class="attendee-name">Matt Weimer</div>
+            <div class="attendee-role">VP of Purchasing</div>
+          </div>
+        </div>
+        <div class="attendee-org-label" style="margin-top:12px;">Reeco</div>
+        <div class="attendee-row">
+          <div class="av av-reeco">ZS</div>
+          <div>
+            <div class="attendee-name">Zander Srodes</div>
+            <div class="attendee-role">Head of Enterprise Sales</div>
+          </div>
+        </div>
+        <div class="attendee-row">
+          <div class="av av-reeco">PB</div>
+          <div>
+            <div class="attendee-name">Paul Bennie</div>
+            <div class="attendee-role">Director of Sales</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HERO TIMELINE -->
+<div class="hero-tl-wrap">
+  <div class="hero-tl-card reveal">
+    <div class="htl-label">
+      <div class="htl-label-eyebrow">Implementation Plan</div>
+      <div class="htl-label-title">What Happens Next</div>
+    </div>
+    <div class="htl-step">
+      <div class="htl-step-num">Step 01</div>
+      <div class="htl-step-title">Proposal Review</div>
+      <div class="htl-step-desc">Robert + Matt review pricing and implementation plan</div>
+      <div class="htl-step-date">Meeting Date TBD</div>
+    </div>
+    <div class="htl-step">
+      <div class="htl-step-num">Step 02</div>
+      <div class="htl-step-title">Pilot Site Selection</div>
+      <div class="htl-step-desc">Identify 2–3 pilot properties; GM advocacy call</div>
+      <div class="htl-step-date">July 2026</div>
+    </div>
+    <div class="htl-step">
+      <div class="htl-step-num">Step 03</div>
+      <div class="htl-step-title">Contract + Kickoff</div>
+      <div class="htl-step-desc">Dynamics GP integration configuration begins</div>
+      <div class="htl-step-date">August 2026</div>
+    </div>
+  </div>
+</div>
+<div class="hero-tl-spacer"></div>
+
+<!-- ──────────── §02 PROBLEM & SOLUTION ──────────── -->
+<section id="problem" data-screen-label="Problem and Solution">
+  <div class="container">
+    <div class="eyebrow">Section 02 / Business Case + Proposed Solution</div>
+    <h2 class="section-title">The Problem You're Solving — and How Reeco Closes It.</h2>
+    <p class="section-sub">Three pain points. Three direct answers.</p>
+
+    <div class="ps-pair reveal">
+      <div class="ps-num">01</div>
+      <div class="ps-card problem">
+        <div class="ps-eyebrow problem"><span class="ps-dot"></span>The Problem</div>
+        <div class="ps-headline">Invoices That Eat Your Team's Time</div>
+        <p class="ps-body">Every property is manually coding invoices — an error-prone, time-consuming process that grows harder to manage as the portfolio expands. Line-item coding that should be automatic becomes a daily burden on your accounting staff and property-level managers alike.</p>
+      </div>
+      <div class="ps-arrow">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="ps-card answer">
+        <div class="ps-eyebrow answer"><span class="ps-dot"></span>The Answer</div>
+        <div class="ps-headline">AP That Codes Itself</div>
+        <p class="ps-body">Reeco's AP automation captures every invoice — paper or email — and codes it by line item using machine learning trained to your GL structure. What used to take 7–10 minutes per invoice takes about 20 seconds. The system learns your coding patterns over time and improves continuously.</p>
+      </div>
+    </div>
+
+    <div class="ps-pair reveal">
+      <div class="ps-num">02</div>
+      <div class="ps-card problem">
+        <div class="ps-eyebrow problem"><span class="ps-dot"></span>The Problem</div>
+        <div class="ps-headline">No Unified View of What the Portfolio Is Spending</div>
+        <p class="ps-body">Purchasing decisions happen property by property, with no centralized visibility. Spend variances only surface at month-end, too late to act. GMs have no real-time signal about where they stand against budget before they submit a purchase order.</p>
+      </div>
+      <div class="ps-arrow">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="ps-card answer">
+        <div class="ps-eyebrow answer"><span class="ps-dot"></span>The Answer</div>
+        <div class="ps-headline">A Live Checkbook at Every Property</div>
+        <p class="ps-body">Reeco's Profit Sword integration pushes daily PO spend data into your existing budget system and pulls GL and forecast data back. GMs see their budget position inside the ordering workflow — before they click submit. Variances get caught at the PO, not at month-end review.</p>
+      </div>
+    </div>
+
+    <div class="ps-pair reveal">
+      <div class="ps-num">03</div>
+      <div class="ps-card problem">
+        <div class="ps-eyebrow problem"><span class="ps-dot"></span>The Problem</div>
+        <div class="ps-headline">Supplier Management Without Centralized IT Support</div>
+        <p class="ps-body">With properties spread across Minnesota and Florida, managing supplier catalog integrations — HSM, broadliners, local vendors — requires centralized oversight that your properties simply don't have. Each hotel is managing its own relationships without a common system or pricing visibility.</p>
+      </div>
+      <div class="ps-arrow">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+      <div class="ps-card answer">
+        <div class="ps-eyebrow answer"><span class="ps-dot"></span>The Answer</div>
+        <div class="ps-headline">One Curated Store. Reeco Manages the Integrations.</div>
+        <p class="ps-body">Reeco builds and maintains your supplier catalog — HSM items, broadliner pricing, and offline vendors — all in one store. Properties don't interact with supplier portals or manage credentials. Reeco's team handles all supplier onboarding, integration setup, and troubleshooting via a support ticket system.</p>
+      </div>
+    </div>
+
+    <div class="callout-quote reveal">
+      <div class="callout-mark">"</div>
+      <div class="callout-body">
+        <p>"The variances on the expense side for our financial statements have tightened up a ton. GMs don't want to have to explain them. So when they're going to make those orders or approve their department heads' orders and it shows you're 10 percent over in this GL — they're going back and saying, do we really need this?"</p>
+        <div class="callout-attr">
+          <div class="callout-avatar">L5</div>
+          <div>
+            <div class="callout-name">L5 Hospitality</div>
+            <div class="callout-meta">Purchasing + AP — Profit Sword integration</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── §03 PLATFORM ──────────── -->
+<section id="platform" class="platform-section" data-screen-label="Platform">
+  <div class="container">
+    <div class="eyebrow">Section 03 / The Platform</div>
+    <h2 class="section-title">What's Included.</h2>
+    <p class="section-sub">Four modules. One login. Built for hospitality back-of-house from the ground up.</p>
+
+    <div class="platform-grid">
+      <div class="platform-card reveal">
+        <div class="platform-card-head">
+          <div class="platform-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          </div>
+          <h3>Purchasing &amp; Receiving</h3>
+        </div>
+        <p>Full visibility and control across F&amp;B, housekeeping, engineering, and service agreements. All your suppliers in one connected place — existing partnerships, pricing, and agreements honored. Mobile receiving lets your team check in orders on the spot; Reeco handles missing items and credits automatically.</p>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="platform-card-head">
+          <div class="platform-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3>AP Automation</h3>
+        </div>
+        <p>Every invoice — organized, AI-coded by line item, and ready to sync with your accounting system. What used to take 7–10 minutes per invoice takes about 20 seconds. The coding learns over time, so it gets faster and more accurate the longer you use it.</p>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="platform-card-head">
+          <div class="platform-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          </div>
+          <h3>Inventory</h3>
+        </div>
+        <p>Always up-to-date pricing, easy audit setup, and a mobile-friendly count experience. Open the app, count by tapping through the list, and your report is ready instantly.</p>
+      </div>
+
+      <div class="platform-card reveal">
+        <div class="platform-card-head">
+          <div class="platform-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2h18l-2 13H5L3 2z"/><path d="M8 21h8M12 17v4"/><path d="M7 7h10M7 11h6"/></svg>
+          </div>
+          <h3>Culinary Management</h3>
+        </div>
+        <p>Menus connected to recipes. Clear visibility into food cost by dish — what's making money, what's costing more than it should, and where to adjust before the next menu cycle.</p>
+      </div>
+    </div>
+
+    <div class="callout-quote mint reveal" style="margin-top:40px;">
+      <div class="callout-mark">"</div>
+      <div class="callout-body">
+        <p>"It's so much more user friendly than the Craftable we were using. And it connects automatically to the other systems — live pricing, plus we can build in the other inventory, the linens and the housekeeping, all the guest supplies, into one big platform."</p>
+        <div class="callout-attr">
+          <div class="callout-avatar">TH</div>
+          <div>
+            <div class="callout-name">Tandem Hospitality Group</div>
+            <div class="callout-meta">Purchasing + Inventory — migrated from Craftable</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── §04 PRICING ──────────── -->
+<section id="pricing" class="pricing-section" data-screen-label="Pricing">
+  <div class="container">
+    <div class="eyebrow">Section 04 / Pricing</div>
+    <h2 class="section-title">Pricing Structured for Your Portfolio.</h2>
+    <p class="section-sub">The proposal below was prepared for TPI Hospitality following your May 22 discovery call and June 4 demo. AP + Purchasing is the base module for all 25 properties, priced by room count. Inventory and Culinary are optional add-ons — toggleable per property — at a flat rate of $200 per property per month.</p>
+
+    <div class="pricing-v2 reveal">
+      <!-- Module reference -->
+      <div class="pv2-section-label">Platform Modules</div>
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Module</th>
+            <th>Billing</th>
+            <th>Unit Price</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="pricing-module">Reeco Bundle — 120+ Rooms<span class="sub">AP + Purchasing: procure-to-pay for properties ≥120 rooms</span></div></td>
+            <td><span class="billing-badge">Monthly</span></td>
+            <td>$450 / property</td>
+            <td>9 properties</td>
+          </tr>
+          <tr>
+            <td><div class="pricing-module">Reeco Bundle — Under 120 Rooms<span class="sub">AP + Purchasing: procure-to-pay for properties under 120 rooms</span></div></td>
+            <td><span class="billing-badge">Monthly</span></td>
+            <td>$375 / property</td>
+            <td>16 properties</td>
+          </tr>
+          <tr>
+            <td><div class="pricing-module">Inventory Management <span style="font-size:11px;color:var(--mint-700);font-weight:var(--fw-bold);background:var(--mint-100);padding:2px 7px;border-radius:999px;">Add-on</span><span class="sub">Mobile audit, always-current counts, instant reports</span></div></td>
+            <td><span class="billing-badge">Monthly</span></td>
+            <td>$200 / property</td>
+            <td>Optional — all 25</td>
+          </tr>
+          <tr>
+            <td><div class="pricing-module">Culinary Management <span style="font-size:11px;color:var(--mint-700);font-weight:var(--fw-bold);background:var(--mint-100);padding:2px 7px;border-radius:999px;">Add-on</span><span class="sub">Menu + recipe costing connected to live POS data</span></div></td>
+            <td><span class="billing-badge">Monthly</span></td>
+            <td>$200 / property</td>
+            <td>Optional — all 25</td>
+          </tr>
+          <tr>
+            <td><div class="pricing-module">Dynamics GP Integration<span class="sub">Direct accounting system integration — included in scope</span></div></td>
+            <td><span class="billing-badge included">Included</span></td>
+            <td style="color:var(--mint-700);font-weight:var(--fw-bold);">$0</td>
+            <td>In scope</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <hr class="pricing-divider">
+
+      <!-- Portfolio pricing -->
+      <div class="pv2-section-label">Your Portfolio Pricing</div>
+      <table class="pricing-table portfolio-table">
+        <thead>
+          <tr>
+            <th>Tier</th>
+            <th>Properties</th>
+            <th>Per Property / Month</th>
+            <th>Monthly Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Bundle — 120+ Rooms</strong></td>
+            <td>9</td>
+            <td>$450</td>
+            <td><strong>$4,050</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Bundle — Under 120 Rooms</strong></td>
+            <td>16</td>
+            <td>$375</td>
+            <td><strong>$6,000</strong></td>
+          </tr>
+          <tr class="total-row">
+            <td><strong>AP + Purchasing Total</strong></td>
+            <td><strong>25</strong></td>
+            <td>—</td>
+            <td><strong>$10,050</strong></td>
+          </tr>
+          <tr style="border-top: 2px solid var(--stone-200);">
+            <td colspan="4" style="padding: 10px 0 0; font-size:11px; font-weight:var(--fw-bold); letter-spacing:1.5px; text-transform:uppercase; color:var(--stone-500); border-bottom: 1px solid var(--stone-200);">Optional Add-Ons</td>
+          </tr>
+          <tr>
+            <td style="color:var(--stone-500);">+ Inventory Management (if enabled)</td>
+            <td style="color:var(--stone-500);">up to 25</td>
+            <td style="color:var(--stone-500);">$200</td>
+            <td style="color:var(--stone-500);">up to $5,000</td>
+          </tr>
+          <tr>
+            <td style="color:var(--stone-500);">+ Culinary Management (if enabled)</td>
+            <td style="color:var(--stone-500);">up to 25</td>
+            <td style="color:var(--stone-500);">$200</td>
+            <td style="color:var(--stone-500);">up to $5,000</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Totals -->
+      <div class="pricing-totals" style="grid-template-columns:1fr;">
+        <div class="ptotal-card">
+          <div class="tlbl">Annual ARR — AP + Purchasing</div>
+          <div class="tnum">$120,600</div>
+          <div class="tdesc">$10,050 / month · 25 properties</div>
+        </div>
+      </div>
+
+      <!-- One-time fees waived -->
+      <div class="fees-waived">
+        <div class="fees-waived-title">One-Time Fees — Fully Waived</div>
+        <div class="fees-row">
+          <span class="fl">Setup Fee ($500 × 25 properties)</span>
+          <span class="fr"><span class="strike">$12,500</span> <span class="free">$0</span></span>
+        </div>
+        <div class="fees-total">
+          <span>Total one-time savings</span>
+          <span class="saved">$12,500 waived</span>
+        </div>
+      </div>
+
+      <!-- Contract terms -->
+      <div class="pricing-terms">
+        <div class="pricing-terms-item">
+          <span class="lbl">Initial Term</span>
+          <span class="val">12 months</span>
+        </div>
+        <div class="pricing-terms-item">
+          <span class="lbl">Billing</span>
+          <span class="val">Quarterly</span>
+        </div>
+        <div class="pricing-terms-item">
+          <span class="lbl">Payment Terms</span>
+          <span class="val">Net 30</span>
+        </div>
+        <div class="pricing-terms-item">
+          <span class="lbl">Renewal</span>
+          <span class="val">Auto-renews in 12-month increments</span>
+        </div>
+      </div>
+
+      <!-- Footer: discount badge + quote link -->
+      <div class="pricing-v2-footer">
+        <div class="pricing-v2-discount">
+          <span class="check-icon">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          Enterprise Pricing — $450 / $375 Bundle Rate · $200 Add-ons
+        </div>
+        <a href="https://zanders-commits.github.io/tpi-pricing/TPI_Interactive_Pricing.html" target="_blank" rel="noopener" class="btn btn-ghost" style="font-size:13px;">View Interactive Pricing Proposal <span class="arr">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── §05 INTEGRATION & IMPLEMENTATION ──────────── -->
+<section id="integration" class="integration-section" data-screen-label="Integration and Implementation">
+  <div class="container">
+    <div class="eyebrow">Section 05 / Integration &amp; Implementation</div>
+    <h2 class="section-title">How We Connect and How We Go Live.</h2>
+    <p class="section-sub">A typical Reeco enterprise rollout for a mixed full-service and select-service portfolio — a plan specific to TPI will be presented at your proposal meeting.</p>
+
+    <!-- Integration cards -->
+    <div class="int-grid">
+      <div class="int-card reveal">
+        <div class="int-card-top">
+          <div>
+            <div class="int-type">Accounting System</div>
+            <div class="int-name">Dynamics GP</div>
+          </div>
+          <span class="int-status ready">✓ Ready to Integrate</span>
+        </div>
+        <p class="int-body">Integration build included in scope. Reeco handles the configuration at no additional charge — no cost on the GP side for access.</p>
+      </div>
+
+      <div class="int-card reveal">
+        <div class="int-card-top">
+          <div>
+            <div class="int-type">Budget &amp; F&amp;B</div>
+            <div class="int-name">Profit Sword</div>
+          </div>
+          <span class="int-status twoway">⇄ Two-Way</span>
+        </div>
+        <p class="int-body">Reeco pushes daily PO spend to Profit Sword; budget and GL forecast data flows back into the ordering workflow in real time.</p>
+      </div>
+
+      <div class="int-card reveal">
+        <div class="int-card-top">
+          <div>
+            <div class="int-type">POS System</div>
+            <div class="int-name">Toast <span style="font-size:13px;color:var(--stone-500);font-weight:var(--fw-medium);">— Margaritaville</span></div>
+          </div>
+          <span class="int-status supported">✓ Supported</span>
+        </div>
+        <p class="int-body">Reeco's strongest POS integration. POS data syncs with inventory counts and culinary menu costing in real time.</p>
+      </div>
+
+      <div class="int-card reveal">
+        <div class="int-card-top">
+          <div>
+            <div class="int-type">GPO</div>
+            <div class="int-name">HSM</div>
+          </div>
+          <span class="int-status partner">★ GPO Partner</span>
+        </div>
+        <p class="int-body">HSM item data and supplier catalog integrated into Reeco's purchasing store. HSM manages setup with shared suppliers directly.</p>
+      </div>
+    </div>
+
+    <!-- Implementation approach + rollout -->
+    <div class="impl-grid">
+      <div class="impl-checklist reveal">
+        <h3>Implementation Approach</h3>
+        <p style="font-size:14px;color:var(--stone-700);line-height:1.6;margin:0 0 18px;">Reeco's onboarding team manages the integration setup and property configuration. Implementation does not require a dedicated full-time resource on your team.</p>
+        <div class="impl-check">
+          <div class="impl-check-icon">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div><strong class="impl-check-label">No Dedicated FTE Required</strong><span class="impl-check-desc"> — from the TPI corporate team to manage rollout.</span></div>
+        </div>
+        <div class="impl-check">
+          <div class="impl-check-icon">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div><strong class="impl-check-label">Pilot-First Rollout</strong><span class="impl-check-desc"> — 2–3 select-service properties establish advocacy before portfolio-wide deployment.</span></div>
+        </div>
+        <div class="impl-check">
+          <div class="impl-check-icon">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div><strong class="impl-check-label">Dynamics GP Integration Configured at Kickoff</strong><span class="impl-check-desc"> — no cost to TPI for access or setup.</span></div>
+        </div>
+        <div class="impl-check">
+          <div class="impl-check-icon">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div><strong class="impl-check-label">Profit Sword Checkbook Live from Day 1</strong><span class="impl-check-desc"> — across participating properties.</span></div>
+        </div>
+      </div>
+
+      <div class="impl-phases">
+        <div class="impl-phase reveal">
+          <div class="impl-phase-eyebrow">Phase 0 — Contract + Kickoff</div>
+          <h4>Integration Setup</h4>
+          <p>Integration credentials configured; Dynamics GP sync and Profit Sword connection go live.</p>
+        </div>
+        <div class="impl-phase reveal">
+          <div class="impl-phase-eyebrow">Phase 1 — Pilot Properties (Select Service)</div>
+          <h4>Pilot Properties Launch</h4>
+          <p>2–3 select-service sites launch first — simpler configuration, faster GM adoption. Manager advocacy call with remaining GMs.</p>
+        </div>
+        <div class="impl-phase reveal">
+          <div class="impl-phase-eyebrow">Phase 2 — Full Portfolio Rollout</div>
+          <h4>Full Portfolio Onboarding</h4>
+          <p>Remaining select-service and full-service properties onboard following pilot validation.</p>
+        </div>
+        <div class="impl-phase reveal" style="border-color:var(--sun-200);background:var(--sun-100);">
+          <div class="impl-phase-eyebrow" style="color:#8C6A00;">Ongoing — Margaritaville Roadmap Alignment</div>
+          <h4 style="color:var(--navy-900);">Margaritaville Roadmap</h4>
+          <p>Centralized requisition feature in active development. Zander to provide roadmap update with confirmed timeline before Margaritaville go-live.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── §06 COLLATERAL LIBRARY ──────────── -->
+<section id="library" data-screen-label="Collateral Library">
+  <div class="container">
+    <div class="eyebrow">Section 06 / Collateral Library</div>
+    <h2 class="section-title">Everything in One Place.</h2>
+    <p class="section-sub">Background materials Robert and Matt can review ahead of the proposal meeting.</p>
+
+    <div class="collateral-grid">
+      <a class="collateral-card reveal" href="https://docs.google.com/presentation/d/1fdHMbo0BFTGzjTDIy8RWjoeUFBz8W0NOuKmx5jJ1HVg/edit" target="_blank" rel="noopener">
+        <div class="coll-icon deck">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="coll-body">
+          <div class="coll-title">Reeco Platform Overview →</div>
+          <div class="coll-desc">Visual walkthrough of the full Reeco platform — purchasing, AP automation, inventory, culinary, integrations, and customer results.</div>
+        </div>
+        <div class="coll-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </a>
+
+      <a class="collateral-card reveal" href="https://app.fireflies.ai/view/01KT1YD688GV7PJV72MKPPTH1X" target="_blank" rel="noopener">
+        <div class="coll-icon video">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div class="coll-body">
+          <div class="coll-title">June 4 Demo Call Recording →</div>
+          <div class="coll-desc">Recording of the Margaritaville demo with Robert Kisabeth, Mario Zanoli, Joel Vogler, Yenier Marrero, and Zander Srodes — hosted in Fireflies.</div>
+        </div>
+        <div class="coll-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </a>
+
+      <a class="collateral-card reveal" href="https://zanders-commits.github.io/tpi-pricing/TPI_Interactive_Pricing.html" target="_blank" rel="noopener">
+        <div class="coll-icon doc">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        </div>
+        <div class="coll-body">
+          <div class="coll-title">Pricing Proposal →</div>
+          <div class="coll-desc">Full interactive pricing proposal — toggle Inventory and Culinary on or off per property. AP + Purchasing included across all 25 hotels.</div>
+        </div>
+        <div class="coll-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </a>
+
+      <a class="collateral-card reveal" href="mailto:zanders@reeco.com?subject=SOC 2 Report Request — TPI Hospitality">
+        <div class="coll-icon lock">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="coll-body">
+          <div class="coll-title">SOC 2 Type II Documentation →</div>
+          <div class="coll-desc">Available upon request — email zanders@reeco.com and we'll send the report within 24 hours.</div>
+        </div>
+        <div class="coll-arrow"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── §07 FAQ ──────────── -->
+<section id="faq" style="background:var(--stone-100);" data-screen-label="FAQ">
+  <div class="container">
+    <div class="eyebrow">Section 07 / FAQs</div>
+    <h2 class="section-title">Questions We Expect — Answered Directly.</h2>
+    <p class="section-sub">If something's missing, email Zander and we'll add it before the meeting.</p>
+
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          <span>"We've never rolled out a procurement platform portfolio-wide before. How do you manage that?"</span>
+          <span class="faq-toggle"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-a">Reeco doesn't require a mandated top-down rollout. The most successful implementations start with a pilot — two or three properties, driven by managers who become advocates. From there, GM-to-GM peer influence does the work. We've supported similar pilot-first strategies at multi-property portfolios across the country. A full rollout plan specific to TPI will be presented at the proposal meeting.</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          <span>"What about Dynamics GP? We haven't heard of other procurement platforms integrating with it."</span>
+          <span class="faq-toggle"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-a">That's correct — we're building the Dynamics GP integration specifically in the context of TPI. Paul Bennie confirmed on our June 9 call that this integration is included in scope at no additional charge to TPI. Reeco handles the build and configuration; there is no fee on the Microsoft GP side for API access.</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          <span>"Will the Profit Sword integration actually give our GMs real-time budget visibility?"</span>
+          <span class="faq-toggle"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-a">Yes. Profit Sword integration is two-way and live. Reeco pushes daily PO spend to Profit Sword, and budget and GL forecast data flows back into the Reeco ordering workflow. GMs see their in-month forecast before they submit a purchase order — the same checkbook behavior your finance team already uses in Profit Sword, surfaced at the moment of ordering.</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          <span>"What about Margaritaville? It's a different operation from our branded hotels."</span>
+          <span class="faq-toggle"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-a">We're transparent about this. Margaritaville Fort Myers Beach has a centralized requisition process that Reeco doesn't fully support today. This feature is actively on our roadmap. Zander will provide a specific roadmap update with a confirmed timeline before any Margaritaville go-live is discussed. For now, the rest of the TPI portfolio — including Compass Naples, all select-service properties, and your full-service branded hotels — is fully supported today.</div>
+      </details>
+
+      <details class="faq-item reveal">
+        <summary class="faq-q">
+          <span>"How does security and data compliance work?"</span>
+          <span class="faq-toggle"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span>
+        </summary>
+        <div class="faq-a">Reeco is SOC 2 Type II certified. We do not store payment card data. Property credentials are handled through secure onboarding screens, and your accounting system credentials are never shared across properties. Full SOC 2 report available upon request — email <a href="mailto:zanders@reeco.com">zanders@reeco.com</a>.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── §08 CONTACT + NEXT STEPS ──────────── -->
+<section id="booking" class="contact-section" data-screen-label="Contact and Next Steps">
+  <div class="container">
+    <div class="eyebrow">Section 08 / Your Reeco Team</div>
+    <h2 class="section-title">Ready to Move Forward?</h2>
+    <p class="section-sub">Use the link below to book time directly with Zander for a proposal review. We'll walk through the pricing, the implementation plan, and the Dynamics GP integration roadmap — and leave time for questions from Robert and the team.</p>
+
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="contact-card-header">
+          <div class="contact-avatar">ZS</div>
+          <div>
+            <div class="contact-name">Zander Srodes</div>
+            <div class="contact-role">Head of Enterprise Sales — Reeco</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <a class="contact-email" href="mailto:zanders@reeco.com">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            zanders@reeco.com
+          </a>
+          <a class="contact-email" href="#booking" style="margin-top:4px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Book time with Zander →
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-card reveal">
+        <div class="contact-card-header">
+          <div class="contact-avatar">PB</div>
+          <div>
+            <div class="contact-name">Paul Bennie</div>
+            <div class="contact-role">Director of Sales — Reeco</div>
+          </div>
+        </div>
+        <a class="contact-email" href="mailto:paulb@reeco.com">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          paulb@reeco.com
+        </a>
+      </div>
+    </div>
+
+    <div class="booking-card reveal">
+      <div>
+        <h3>Book a Proposal Meeting.</h3>
+        <p>45 minutes. Walk through pricing, implementation, and the Dynamics GP integration roadmap — and leave time for questions from Robert and Matt.</p>
+      </div>
+      <div class="booking-cta">
+        <a href="#booking" class="btn btn-on-dark btn-lg" style="background:var(--navy-900);color:#fff;">Book a Proposal Meeting → <span class="arr"></span></a>
+        <span class="sub-line">opens Zander's live booking page</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── FOOTER ──────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="assets/reeco-logo-primary-green.svg" alt="Reeco">
+      <span style="font-size:11px;color:var(--stone-400);letter-spacing:1.5px;text-transform:uppercase;font-weight:var(--fw-bold);">/// digital sales room</span>
+    </div>
+    <div class="footer-note">
+      Prepared by Zander Srodes, Head of Enterprise Sales · Reeco · <a href="mailto:zanders@reeco.com">zanders@reeco.com</a> · Learn more at <a href="https://www.reeco.com" target="_blank" rel="noopener">reeco.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.07, rootMargin: '0px 0px -32px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+</script>
+
+</body>
+</html>
